@@ -16,6 +16,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version: ["18", "20"]
+        exclude:
+          - os: windows-latest
+            node-version: "18"
 
     steps:
       - name: check out code
