@@ -1,0 +1,26 @@
+name: Hello World
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checking everything is working
+        run: echo "Everything is working!"
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: echo "Hello, World!"
+
+      - name: Get api key
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: echo "API Key is $API_KEY"
