@@ -9,16 +9,28 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: ["18", "20"]
 
     steps:
       - name: check out code
         uses: actions/checkout@v5
 
-      - name: set up Node.js
+      - name: set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: ${{ matrix.node-version }}
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: run lint
+        run: npm run lint
 
       - name: run tests
         run: npm test

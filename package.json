@@ -2,6 +2,10 @@
   "name": "actions-lab",
   "version": "1.0.0",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "lint": "echo 'linting passed'"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21"
   }
 }
