@@ -17,8 +17,17 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: echo "Hello, World!"
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Python complete
+        run: |
+          python testingpy.py
 
       - name: Get api key
         env:
