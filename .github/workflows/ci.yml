@@ -52,6 +52,14 @@ jobs:
           name: build-output
           path: dist/
 
+      - name: write job summary
+        run: |
+          echo " ## Build summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo " - **build time:** $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo " - ** node version: ** $(node -v)" >> $GITHUB_STEP_SUMMARY
+          echo " - **artifact:** build-output (dist/)" >> $GITHUB_STEP_SUMMARY
+
   test:
     needs: [build, lint]
     runs-on: ubuntu-latest
